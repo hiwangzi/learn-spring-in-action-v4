@@ -1,7 +1,7 @@
-package knight.impl;
+package com.hiwangzi.knight.impl;
 
-import knight.Knight;
-import quest.impl.RescueDamselQuest;
+import com.hiwangzi.knight.Knight;
+import com.hiwangzi.quest.impl.RescueDamselQuest;
 
 public class DamselRescuingKnight implements Knight {
 

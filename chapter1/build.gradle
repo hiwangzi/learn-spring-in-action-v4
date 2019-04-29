@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'com.hiwangzi'
@@ -12,5 +13,7 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.springframework:spring-context:5.1.6.RELEASE'
 }
+
+mainClassName = 'com.hiwangzi.KnightMain'
