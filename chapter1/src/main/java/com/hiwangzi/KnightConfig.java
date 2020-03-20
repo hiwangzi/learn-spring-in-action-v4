@@ -1,6 +1,5 @@
 package com.hiwangzi;
 
-
 import com.hiwangzi.knight.Knight;
 import com.hiwangzi.knight.impl.BraveKnight;
 import com.hiwangzi.quest.Quest;

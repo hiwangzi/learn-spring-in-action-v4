@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     compile 'org.springframework:spring-context:5.1.6.RELEASE'
+    compile 'org.aspectj:aspectjweaver:1.9.4'
 }
 
 mainClassName = 'com.hiwangzi.KnightMain'

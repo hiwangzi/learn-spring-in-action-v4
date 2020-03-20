@@ -8,6 +8,7 @@ public class KnightMain {
 
     public static void main(String[] args) {
         runBaseOnXml();
+        System.out.println("=== === ===");
         runBaseOnAnnotation();
     }
 
