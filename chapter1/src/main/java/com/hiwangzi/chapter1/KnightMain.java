@@ -1,6 +1,6 @@
-package com.hiwangzi;
+package com.hiwangzi.chapter1;
 
-import com.hiwangzi.knight.Knight;
+import com.hiwangzi.chapter1.knight.Knight;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

@@ -1,9 +1,9 @@
-package com.hiwangzi;
+package com.hiwangzi.chapter1;
 
-import com.hiwangzi.knight.Knight;
-import com.hiwangzi.knight.impl.BraveKnight;
-import com.hiwangzi.quest.Quest;
-import com.hiwangzi.quest.impl.RescueDamselQuest;
+import com.hiwangzi.chapter1.quest.Quest;
+import com.hiwangzi.chapter1.quest.impl.RescueDamselQuest;
+import com.hiwangzi.chapter1.knight.Knight;
+import com.hiwangzi.chapter1.knight.impl.BraveKnight;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

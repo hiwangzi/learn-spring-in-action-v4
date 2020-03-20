@@ -1,6 +1,6 @@
-package com.hiwangzi.quest.impl;
+package com.hiwangzi.chapter1.quest.impl;
 
-import com.hiwangzi.quest.Quest;
+import com.hiwangzi.chapter1.quest.Quest;
 
 public class RescueDamselQuest implements Quest {
 

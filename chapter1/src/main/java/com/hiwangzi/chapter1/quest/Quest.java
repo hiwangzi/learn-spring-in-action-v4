@@ -1,4 +1,4 @@
-package com.hiwangzi.quest;
+package com.hiwangzi.chapter1.quest;
 
 public interface Quest {
 

@@ -1,4 +1,4 @@
-package com.hiwangzi.knight;
+package com.hiwangzi.chapter1.knight;
 
 public interface Knight {
 

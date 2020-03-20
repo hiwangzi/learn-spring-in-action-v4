@@ -1,4 +1,4 @@
-package com.hiwangzi;
+package com.hiwangzi.chapter1;
 
 import java.io.PrintStream;
 

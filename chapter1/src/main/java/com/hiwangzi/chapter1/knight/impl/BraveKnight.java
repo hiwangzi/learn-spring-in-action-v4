@@ -1,7 +1,7 @@
-package com.hiwangzi.knight.impl;
+package com.hiwangzi.chapter1.knight.impl;
 
-import com.hiwangzi.knight.Knight;
-import com.hiwangzi.quest.Quest;
+import com.hiwangzi.chapter1.knight.Knight;
+import com.hiwangzi.chapter1.quest.Quest;
 
 public class BraveKnight implements Knight {
 
