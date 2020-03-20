@@ -23,9 +23,13 @@
   </bean>
 
   <aop:config>
+    <!-- 将 Minstrel bean 声明为切面 -->
     <aop:aspect ref="minstrel">
+      <!-- 定义切点 expression属性所用的是AspectJ的切点表达式语言 -->
       <aop:pointcut id="embark" expression="execution(* *.embarkOnQuest(..))"/>
+      <!-- 声明前置通知(before advice) -->
       <aop:before pointcut-ref="embark" method="singBeforeQuest"/>
+      <!-- 声明后置通知(after advice) -->
       <aop:after pointcut-ref="embark" method="singAfterQuest"/>
     </aop:aspect>
   </aop:config>
