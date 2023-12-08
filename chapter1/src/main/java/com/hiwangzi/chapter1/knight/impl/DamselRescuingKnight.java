@@ -11,6 +11,7 @@ public class DamselRescuingKnight implements Knight {
         this.quest = new RescueDamselQuest();
     }
 
+    @Override
     public void embarkOnQuest() {
         quest.embark();
     }

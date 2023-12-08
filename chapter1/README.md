@@ -14,22 +14,22 @@
 * 耦合具有两面性(two-headed beast)，耦合是必须的，但应当被小心谨慎地管理：
   * 一方面，紧密耦合的代码难以测试、难以复用、难以理解，并且典型地表现出“打地鼠”式的bug特性(修复一个bug，将会出现一个或者更多新的bug)。
   * 另一方面，一定程度的耦合又是必须的——完全没有耦合的代码什么也做不了。为了完成有实际意义的功能，不同的类必须以适当的方式进行交互。
-* DI 所带来的最大收益——松耦合。如果一个对象只通过接口(而不是具体实现或初始化过程)来表明依赖关系，那么这种依赖就能够在对象本身毫不知情的情况下，用不同的具体实现进行替换（[例如 BraveKnight 关联 Quest](https://github.com/zill057/learn-spring-in-action/blob/ae30c84b9f26e6eeeec7170c3f92369ec0f10277/chapter1/src/main/java/knight/impl/BraveKnight.java#L10)）。
+* DI 所带来的最大收益——松耦合。如果一个对象只通过接口(而不是具体实现或初始化过程)来表明依赖关系，那么这种依赖就能够在对象本身毫不知情的情况下，用不同的具体实现进行替换（[例如 BraveKnight 关联 Quest](https://github.com/hiwangzi/learn-spring-in-action-v4/blob/fd4ea6d1eef81a3922626c2566e28dd5e7623b06/chapter1/src/main/java/com/hiwangzi/chapter1/knight/impl/BraveKnight.java#L10)）。
 * 创建应用组件之间协作的行为通常称为装配（wiring）
-  * [基于 XML 的配置](https://github.com/zill057/learn-spring-in-action/blob/084d96870ddb2bc032c5f23db13ebc49c6f72d75/chapter1/src/main/resources/knights.xml)
-  * [基于 Java 的配置](https://github.com/zill057/learn-spring-in-action/blob/32991c26128db45c22db5e7ef2d14c47a3fcf40f/chapter1/src/main/java/com/hiwangzi/KnightConfig.java)
+  * [基于 XML 的配置](https://github.com/hiwangzi/learn-spring-in-action-v4/blob/fd4ea6d1eef81a3922626c2566e28dd5e7623b06/chapter1/src/main/resources/knights.xml)
+  * [基于 Java 的配置](https://github.com/hiwangzi/learn-spring-in-action-v4/blob/fd4ea6d1eef81a3922626c2566e28dd5e7623b06/chapter1/src/main/java/com/hiwangzi/chapter1/KnightConfig.java)
 * Spring 通过应用上下文（Application Context）装载 bean 的定义并把他们组装起来。Spring应用上下文全权负责对象的创建与组装。Spring自带了应用上下文的实现，它们之间的主要区别仅仅在于如何加载配置。
 
 ## 应用切面
 
-* DI 关注松耦合，AOP 关注将遍布应用各处的功能分离形成可重用的组件
+* DI 关注松耦合，AOP 关注将遍布应用各处的功能分离形成可**重用**的组件
   * 面向切面编程往往被定义为促使软件系统实现关注点的分离一项技术。系统由许多不同的组件组成，每一个组件各负责一块特定功能。除了实现自身核心的功能之外，这些组件还经常承担着额外的职责。诸如日志、事务管理和安全这样的系统服务经常融入到自身具有核心业务逻辑的组件中去，这些系统服务通常被称为横切关注点，因为它们会跨越系统的多个组件。
   * 如果将这些关注点分散到多个组件中去，代码将会带来双重的复杂性。
     * 实现系统关注点功能的代码将会重复出现在多个组件中。这意味着如果你要改变这些关注点的逻辑，必须修改各个模块中的相关实现。即使你把这些关注点抽象为一个独立的模块，其他模块只是调用它的方法，但方法的调用还是会重复出现在各个模块中。
     * 组件会因为那些与自身核心业务无关的代码而变得混乱。一个向地址簿增加地址条目的方法应该只关注如何添加地址，而不应该关注它是不是安全的或者是否需要支持事务。
   * 下图展示了这种复杂性。左边的业务对象与系统级服务结合得过于紧密。每个对象不但要知道它需要记日志、进行安全控制和参与事务，还要亲自执行这些服务。在整个系统内，关注点(例如日志和安全)的调用经常散布到各个模块中，而这些关注点并不是模块的核心业务。
-    ![不使用AOP](./notes-resources/not-using-aop.jpg)
+    ![不使用AOP](imgs/not-using-aop.jpg)
   * 而使用了 AOP 后，可以把切面想象为覆盖在很多组件之上的一个外壳。应用是由那些实现各自业务功能的模块组成的。借助AOP，可以使用各种功能层去包裹核心业务层。这些层以声明的方式灵活地应用到系统中，核心应用甚至根本不知道它们的存在。这是一个非常强大的理念，可以将安全、事务和日志关注点与核心业务逻辑相分离。
-    ![使用AOP](./notes-resources/using-aop.jpg)
-  * [吟游诗人的例子（基于 XML 的配置）](https://github.com/zill057/learn-spring-in-action/blob/f89868ccb65e8f673a143da689a4c2ec06c5b725/chapter1/src/main/resources/knights.xml#L25)
-    * 如果不使用 AOP，可以将 `Minstrel` 注入 `BraveNight`，但这样会造成 `BraveNight` 代码的复杂化，例如是否还需要考虑增加判断，以应对注入的 `Minstrel` 为 `null` 的情况。
+    ![使用AOP](imgs/using-aop.jpg)
+  * [吟游诗人的例子（基于 XML 的配置）](https://github.com/hiwangzi/learn-spring-in-action-v4/blob/fd4ea6d1eef81a3922626c2566e28dd5e7623b06/chapter1/src/main/resources/knights.xml#L25)
+    * 如果不使用 AOP，可以将 `Minstrel`（吟游诗人） 注入 `BraveNight`，但这样会造成 `BraveNight` 代码的复杂化，例如是否还需要考虑增加判断，以应对注入的 `Minstrel` 为 `null` 的情况。
