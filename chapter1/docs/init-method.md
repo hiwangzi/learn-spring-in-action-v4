@@ -26,7 +26,7 @@ public class ExampleBean {
 }
 ```
 
-在上述例子中，`ExampleBean` 类有一个名为 `init` 的方法，它将作为bean的初始化方法。当Spring容器创建 `exampleBean` bean时，它将调用 `init` 方法。
+在上述例子中，`ExampleBean` 类有一个名为 `init` 的方法，它将作为bean的初始化方法。当Spring容器创建 `exampleBean` bean时，它将调用 `init` 方法。[例子：基于Java配置时如何声明init-method。](https://github.com/hiwangzi/learn-spring-in-action-v4/blob/c39064da4c388538ae7a116206c3425b0e1a0e1e/chapter1/src/main/java/com/hiwangzi/chapter1/LifecycleKnightConfig.java#L14)
 
 从Spring Framework 5开始，除了使用 `init-method` 属性，还可以使用 `@PostConstruct` 注解来指示初始化方法，这是Java标准（JSR-250）的一部分。这种方式更加简洁，且与Spring的配置方式脱钩，使得代码更加依赖注入风格。
 
@@ -48,4 +48,4 @@ public class ExampleBean {
 }
 ```
 
-在这个版本中，`init` 方法上的 `@PostConstruct` 注解告诉Spring，这个方法应该在bean的所有属性被设置后调用，且只调用一次。使用注解的方式，不需要在XML配置文件中指定 `init-method`。
+在这个版本中，`init` 方法上的 `@PostConstruct` 注解告诉Spring，这个方法应该在bean的所有属性被设置后调用，且只调用一次。使用注解的方式，不需要在XML配置文件中指定 `init-method`（虽然方法名字一样，但是原理不同，而且两种方法可以同时使用）。
