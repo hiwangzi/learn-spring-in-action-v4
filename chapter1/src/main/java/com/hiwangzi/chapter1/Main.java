@@ -8,8 +8,10 @@ public class Main {
 
     public static void main(String[] args) {
         runBaseOnXml();
-        System.out.println("\n---------\n");
+        System.out.println("---------");
         runBaseOnAnnotation();
+        System.out.println("---------");
+        runToShowLifecycle();
     }
 
     private static void runBaseOnXml() {
@@ -23,6 +25,14 @@ public class Main {
     private static void runBaseOnAnnotation() {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(KnightConfig.class);
+        Knight knight = context.getBean(Knight.class);
+        knight.embarkOnQuest();
+        context.close();
+    }
+
+    private static void runToShowLifecycle() {
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(LifecycleKnightConfig.class);
         Knight knight = context.getBean(Knight.class);
         knight.embarkOnQuest();
         context.close();

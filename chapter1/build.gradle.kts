@@ -17,4 +17,5 @@ repositories {
 dependencies {
     implementation("org.springframework:spring-context:5.3.31")
     implementation("org.aspectj:aspectjweaver:1.9.4")
+    implementation("jakarta.platform:jakarta.jakartaee-api:10.0.0")
 }
