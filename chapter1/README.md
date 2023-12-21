@@ -14,7 +14,7 @@
 * 耦合具有两面性(two-headed beast)，耦合是必须的，但应当被小心谨慎地管理：
   * 一方面，紧密耦合的代码难以测试、难以复用、难以理解，并且典型地表现出“打地鼠”式的bug特性(修复一个bug，将会出现一个或者更多新的bug)。
   * 另一方面，一定程度的耦合又是必须的——完全没有耦合的代码什么也做不了。为了完成有实际意义的功能，不同的类必须以适当的方式进行交互。
-* DI 所带来的最大收益——松耦合。如果一个对象只通过接口(而不是具体实现或初始化过程)来表明依赖关系，那么这种依赖就能够在对象本身毫不知情的情况下，用不同的具体实现进行替换（[例如 BraveKnight 关联 Quest](https://github.com/hiwangzi/learn-spring-in-action-v4/blob/fd4ea6d1eef81a3922626c2566e28dd5e7623b06/chapter1/src/main/java/com/hiwangzi/chapter1/knight/impl/BraveKnight.java#L10)）。
+* DI 所带来的最大收益——松耦合。如果一个对象只通过接口(而不是具体实现或初始化过程)来表明依赖关系，那么这种依赖就能够在对象本身毫不知情的情况下，用不同的具体实现进行替换（例如：[BraveKnight 关联 Quest](https://github.com/hiwangzi/learn-spring-in-action-v4/blob/fd4ea6d1eef81a3922626c2566e28dd5e7623b06/chapter1/src/main/java/com/hiwangzi/chapter1/knight/impl/BraveKnight.java#L10)，这里BraveKnight关联的是接口，而不是具体的实现）。
 * 创建应用组件之间协作的行为通常称为装配（wiring）
   * [基于 XML 的配置](https://github.com/hiwangzi/learn-spring-in-action-v4/blob/fd4ea6d1eef81a3922626c2566e28dd5e7623b06/chapter1/src/main/resources/knights.xml)
   * [基于 Java 的配置](https://github.com/hiwangzi/learn-spring-in-action-v4/blob/fd4ea6d1eef81a3922626c2566e28dd5e7623b06/chapter1/src/main/java/com/hiwangzi/chapter1/KnightConfig.java)
@@ -63,15 +63,15 @@
 3. 如果bean实现了`BeanNameAware`接口，Spring将bean的ID传递给`setBeanName()`方法；
 4. 如果bean实现了`BeanFactoryAware`接口，Spring将调用`setBeanFactory()`方法，将`BeanFactory`容器实例传入；
 5. 如果bean实现了`ApplicationContextAware`接口，Spring将调用`setApplicationContext()`方法，将bean所在的应用上下文的引用传入进来；
-6. 如果bean实现了`BeanPostProcessor`接口，Spring将调用它们的`postProcessBeforeInitialization()`方法；
-7. 执行带有`@PostConstruct`注解的方法；（JSR-250规范）
-8. 如果bean实现了`InitializingBean`接口，Spring将调用它们的`afterPropertiesSet()`方法。
-9. 如果bean使用[init-method](./docs/init-method.md)声明了初始化方法，该方法也会被调用；
-10. 如果bean实现了`BeanPostProcessor`接口，Spring将调用它们的`postProcessAfterInitialization()`方法；
+6. 1️⃣如果bean实现了`BeanPostProcessor`接口，Spring将调用它们的`postProcessBeforeInitialization()`方法；
+7. 2️⃣执行带有`@PostConstruct`注解的方法；（JSR-250规范）
+8. 3️⃣如果bean实现了`InitializingBean`接口，Spring将调用它们的`afterPropertiesSet()`方法。
+9. 4️⃣如果bean使用[init-method](./docs/init-method.md)声明了初始化方法，该方法也会被调用；
+10. 5️⃣如果bean实现了`BeanPostProcessor`接口，Spring将调用它们的`postProcessAfterInitialization()`方法；
 11. 此时，bean已经准备就绪，可以被应用使用了，它们将一直驻留在应用上下文中，直到该应用上下文被销毁；
-12. 执行带有@PreDestroy注解的方法；（JSR-250规范）
-13. 如果bean实现了`DisposableBean`接口，Spring将调用它的`destroy()`接口方法。
-14. 如果bean使用destroy-method声明了销毁方法，该方法也会被调用。
+12. 2️⃣执行带有@PreDestroy注解的方法；（JSR-250规范）
+13. 3️⃣如果bean实现了`DisposableBean`接口，Spring将调用它的`destroy()`接口方法。
+14. 4️⃣如果bean使用destroy-method声明了销毁方法，该方法也会被调用。
 
 实际测试代码时遇到的一些问题：
 * 6、10没有执行
