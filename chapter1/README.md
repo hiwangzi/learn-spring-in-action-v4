@@ -76,3 +76,5 @@
 实际测试代码时遇到的一些问题：
 * 6、10没有执行
 * 7、12没有执行
+
+![bean的生命周期-黑马](docs/imgs/bean-lifecycle-heima.png)
